@@ -3,7 +3,7 @@
 ## About
 
 ### Credits
-This tool was lovingly made for use at [VenueBook](https://venuebook.com/).
+This tool was lovingly made for use at [VenueBook](https://venuebook.com/) by Winston Hoy and Jay Zawrotny.
 
 ### License
 BSD-3-Clause (c) 2016 VenueBook, Inc.
