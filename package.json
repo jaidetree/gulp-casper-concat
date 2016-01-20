@@ -15,6 +15,9 @@
     "gulp"
   ],
   "author": "Jay Zawrotny <jay@venuebook.com>",
+  "contributors": [
+    "Winston Hoy <winston.hoy@venuebook.com>"
+  ],
   "license": "BSD-3-Clause",
   "bugs": {
     "url": "https://github.com/jayzawrotny/gulp-casper-concat/issues"
