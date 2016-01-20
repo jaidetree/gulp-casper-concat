@@ -37,6 +37,14 @@ export default class TestBuilder extends Duplex {
     this.input = through.obj();
     this.output = through.obj();
 
+    if (typeof options === 'string') {
+      let filename = options;
+
+      options = {
+        filename,
+      };
+    }
+
     this.options = Object.assign({}, options);
 
     this.init();

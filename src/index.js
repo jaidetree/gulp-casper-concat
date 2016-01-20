@@ -10,7 +10,7 @@ import JSONFormatter from './JSONFormatter';
  * gulp.src('test/integration/**\/*.js')
  *
  *   // Concats the source files into one test json file
- *   .pipe(casper.concat())
+ *   .pipe(casper.concat('integrations_test.js'))
  *
  *   // Runs the test with the master test file
  *   .pipe(caspser.run())
@@ -18,6 +18,9 @@ import JSONFormatter from './JSONFormatter';
  *   // Reports the results with the given reporter. Default just writes
  *   // it to stdout.
  *   .pipe(casper.report())
+ *
+ *   // Write to a file if you would like
+ *   .pipe(gulp.dest('results'));
  */
 
 export class CasperConcat {
