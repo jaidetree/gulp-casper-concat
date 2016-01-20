@@ -1,7 +1,7 @@
 import splicer from 'labeled-stream-splicer';
 import through from 'through2';
 
-import AssembleTransform './AssembleTransform';
+import AssembleTransform from './AssembleTransform';
 import ES6Transform from './ES6Transform';
 import ReadTransform from './ReadTransform';
 import StoreTransform from './StoreTransform';
@@ -13,7 +13,7 @@ import { Duplex } from 'stream';
  * Concats casper test functions into a single test object JSON that it feeds
  * into a casper file
  */
-class TestBuilder extends Duplex {
+export default class TestBuilder extends Duplex {
   isInitialized = false;
 
   /**
@@ -88,7 +88,7 @@ class TestBuilder extends Duplex {
       pipeline.push(stream);
 
       stream.on('error', (err) => {
-        console.error(err.stack || err.message || err)
+        this.emit('error', err);
       });
     });
 
@@ -117,8 +117,22 @@ class TestBuilder extends Duplex {
 
   /**
    * Required duplex stream write impelmentation. Writes to our input stream.
+   *
+   * @param {vinyl} file - A vinyl file from gulp.src or other gulp task
+   * @param {string} enc - Encoding type. Ignored in object streams.
+   * @param {function} done - Callback when done writing to this stream.
    */
-  _write (...args) {
-    this.input.write(...args);
+  _write (file, enc, done) {
+    if (file.isStream()) {
+      file.pipe(this.input);
+      return;
+    }
+
+    if (file.isNull()) {
+      done(null, file);
+      return;
+    }
+
+    this.input.write(file, enc, done);
   }
 }
